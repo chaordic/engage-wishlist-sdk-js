@@ -1,0 +1,36 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
+    "no-else-return": ["error", {
+      "allowElseIf": true
+    }],
+    "no-empty": 0,
+    "no-plusplus": ["error", {
+      "allowForLoopAfterthoughts": true
+    }],
+    "no-param-reassign": ["error", {
+      "props": false
+    }],
+    "no-unused-expressions": 0,
+    "object-curly-newline": ["error", {
+      "consistent": true
+    }]
+  },
+  "globals":{
+    "linx": true,
+    "_nm": true
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
+  }
+}

@@ -1,14 +1,31 @@
 version: 2
+
+defaults: &defaults
+  working_directory: ~/src
+  docker:
+      - image: circleci/node:10.14-browsers
+
 jobs:
   build:
-    docker:
-      - image: debian:stretch
+    <<: *defaults
+
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
       - run:
-          name: Greeting
-          command: echo Hello, world.
+          name: Install dependencies
+          command: npm i
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
       - run:
-          name: Print the Current Time
-          command: date
-
+          name: ESLint
+          command: npx run lint
+      - run:
+          name: Karma Tests
+          command: npx run test
