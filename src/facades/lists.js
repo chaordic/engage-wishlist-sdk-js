@@ -17,6 +17,9 @@ export default {
     itemType,
     productFormat,
     showOnlyAvailable,
+    filter,
+    offset,
+    limit,
   }) => {
     try {
       const res = await client.get(`/lists/${listId}`, {
@@ -27,6 +30,9 @@ export default {
           itemType,
           productFormat,
           showOnlyAvailable,
+          filter,
+          offset,
+          limit,
         },
       });
       return res.data;

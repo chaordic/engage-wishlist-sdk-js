@@ -20,7 +20,9 @@ export default {
       listId: Joi.string().required(),
       productFormat: Joi.string().valid('onlyIds', 'compact', 'complete'),
       showOnlyAvailable: [Joi.boolean(), Joi.any().valid('1', '0')],
-      filter: Joi.string(),
+      filter: [Joi.array().items(Joi.string()), Joi.string()],
+      offset: Joi.number().integer().min(0),
+      limit: Joi.number().integer().positive(),
     }, handleJoiError);
   },
 
