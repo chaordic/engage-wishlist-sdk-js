@@ -35,10 +35,12 @@ describe('List param validator', function() {
       productFormat: 'onlyIds',
       showOnlyAvailable: true,
       filter: 'category:TWFzY3VsaW5v',
+      offset: 3,
+      limit: 3,
     };
 
     const required = ['userId', 'apiKey', 'secretKey', 'itemType', 'listId'];
-    const optional = ['productFormat', 'showOnlyAvailable', 'filter'];
+    const optional = ['productFormat', 'showOnlyAvailable', 'filter', 'offset', 'limit'];
 
     it('should not throw when all parameters are valid', function() {
       expect(() => {
