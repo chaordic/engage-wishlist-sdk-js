@@ -29,7 +29,7 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'GET',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*/,
         [200, { 'Content-Type': 'application/json' }, JSON.stringify(res)],
       );
 
@@ -50,14 +50,14 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'GET',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*/,
         [500, {}, 'Internal server error'],
       );
 
       server.respondImmediately = true;
 
-      const res = await ListFacade.getList(options);
-      expect(res).to.deep.equal({});
+      const response = await ListFacade.getList(options);
+      expect(response).to.deep.equal({});
     });
   });
 
@@ -84,7 +84,7 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'GET',
-        /\/api\/v3\/lists/,
+        /\/engage\/wishlist\/v3\/lists/,
         [200, { 'Content-Type': 'application/json' }, JSON.stringify(res)],
       );
 
@@ -104,15 +104,15 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'GET',
-        /\/api\/v3\/lists/,
+        /\/engage\/wishlist\/v3\/lists/,
         [500, { 'Content-Type': 'application/json' }, 'Internal server error'],
       );
 
       server.respondImmediately = true;
 
-      const res = await ListFacade.getAllLists(options);
-      expect(res).to.be.an('array');
-      expect(res.length).to.equal(0);
+      const response = await ListFacade.getAllLists(options);
+      expect(response).to.be.an('array');
+      expect(response.length).to.equal(0);
     });
   });
 
@@ -134,20 +134,20 @@ describe('ApiFacade', function() {
         listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
       };
 
-      const response = {
+      const expectedResponse = {
         count: 5,
       };
 
       server.respondWith(
         'GET',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*\/count/,
-        [200, { 'Content-Type': 'application/json' }, JSON.stringify(response)],
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*\/count/,
+        [200, { 'Content-Type': 'application/json' }, JSON.stringify(expectedResponse)],
       );
 
       server.respondImmediately = true;
 
-      const res = await ListFacade.getListItemCount(options);
-      expect(res).to.deep.equal(response);
+      const response = await ListFacade.getListItemCount(options);
+      expect(response).to.deep.equal(expectedResponse);
     });
 
     it('should return null when the server returns an error', async function() {
@@ -161,14 +161,14 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'GET',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*\/count/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*\/count/,
         [500, { 'Content-Type': 'application/json' }, 'Internal server error'],
       );
 
       server.respondImmediately = true;
 
-      const res = await ListFacade.getListItemCount(options);
-      expect(res).to.equal(null);
+      const response = await ListFacade.getListItemCount(options);
+      expect(response).to.equal(null);
     });
   });
 
@@ -195,7 +195,7 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'POST',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*\/items/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*\/items/,
         [200, { 'Content-Type': 'application/json' }, res],
       );
 
@@ -217,14 +217,14 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'POST',
-        /\/api\/v3\/lists/,
+        /\/engage\/wishlist\/v3\/lists/,
         [500, { 'Content-Type': 'application/json' }, 'Internal server error'],
       );
 
       server.respondImmediately = true;
 
-      const res = await ListFacade.insertItemOnList(options);
-      expect(res).to.equal(null);
+      const response = await ListFacade.insertItemOnList(options);
+      expect(response).to.equal(null);
     });
   });
 
@@ -251,7 +251,7 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'DELETE',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*\/items\/[0-9]*/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*\/items\/[0-9]*/,
         [200, { 'Content-Type': 'application/json' }, res],
       );
 
@@ -273,7 +273,7 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'DELETE',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*\/items\/[0-9]*/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*\/items\/[0-9]*/,
         [500, { 'Content-Type': 'application/json' }, 'Internal server error'],
       );
 
@@ -310,7 +310,7 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'POST',
-        /\/api\/v3\/lists/,
+        /\/engage\/wishlist\/v3\/lists/,
         [200, { 'Content-Type': 'application/json' }, JSON.stringify(res)],
       );
 
@@ -331,14 +331,14 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'POST',
-        /\/api\/v3\/lists/,
+        /\/engage\/wishlist\/v3\/lists/,
         [500, { 'Content-Type': 'application/json' }, 'Internal server error'],
       );
 
       server.respondImmediately = true;
 
-      const res = await ListFacade.createList(options);
-      expect(res).to.deep.equal({});
+      const response = await ListFacade.createList(options);
+      expect(response).to.deep.equal({});
     });
   });
 
@@ -372,7 +372,7 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'PUT',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*/,
         [200, { 'Content-Type': 'application/json' }, JSON.stringify(res)],
       );
 
@@ -394,14 +394,14 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'PUT',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*/,
         [500, { 'Content-Type': 'application/json' }, 'Internal server error'],
       );
 
       server.respondImmediately = true;
 
-      const res = await ListFacade.updateList(options);
-      expect(res).to.deep.equal({});
+      const response = await ListFacade.updateList(options);
+      expect(response).to.deep.equal({});
     });
   });
 
@@ -427,7 +427,7 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'DELETE',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*/,
         [200, { 'Content-Type': 'application/json' }, res],
       );
 
@@ -448,14 +448,14 @@ describe('ApiFacade', function() {
 
       server.respondWith(
         'DELETE',
-        /\/api\/v3\/lists\/[A-Za-z0-9-]*/,
+        /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*/,
         [500, { 'Content-Type': 'application/json' }, 'Internal server error'],
       );
 
       server.respondImmediately = true;
 
-      const res = await ListFacade.deleteList(options);
-      expect(res).to.equal(null);
+      const response = await ListFacade.deleteList(options);
+      expect(response).to.equal(null);
     });
   });
 });

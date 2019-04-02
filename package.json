@@ -1,5 +1,5 @@
 {
-  "name": "engage-wishlist-sdk-js",
+  "name": "@linx-impulse/engage-wishlist-sdk-js",
   "version": "0.1.0",
   "description": "Linx Impulse Engage Wishlist SDK",
   "main": "src/index.js",
@@ -63,6 +63,7 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
+    "@linx-impulse/commons-js": "git+ssh://git@github.com:chaordic/commons-js.git",
     "axios": "0.18.0",
     "joi": "14.3.1",
     "joi-browser": "13.4.0",

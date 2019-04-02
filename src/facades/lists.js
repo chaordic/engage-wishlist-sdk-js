@@ -9,7 +9,7 @@ const client = axios.create({
 const { error } = console;
 
 export default {
-  getList: async ({
+  getList: ({
     listId,
     userId,
     apiKey,
@@ -22,7 +22,7 @@ export default {
     limit,
   }) => {
     try {
-      const res = await client.get(`/lists/${listId}`, {
+      return client.get(`/lists/${listId}`, {
         params: {
           userId,
           apiKey,
@@ -34,30 +34,28 @@ export default {
           offset,
           limit,
         },
-      });
-      return res.data;
+      }).then(res => res.data);
     } catch (err) {
       error(err.message);
       return {};
     }
   },
 
-  getAllLists: async ({
+  getAllLists: ({
     userId,
     apiKey,
     secretKey,
     itemType,
   }) => {
     try {
-      const res = await client.get('/lists', {
+      return client.get('/lists', {
         params: {
           userId,
           apiKey,
           secretKey,
           itemType,
         },
-      });
-      return res.data;
+      }).then(res => res.data);
     } catch (err) {
       error(err.message);
       return [];
@@ -73,7 +71,7 @@ export default {
     showOnlyAvailable,
   }) => {
     try {
-      const res = await client.get(`/lists/${listId}/count`, {
+      return client.get(`/lists/${listId}/count`, {
         params: {
           userId,
           apiKey,
@@ -81,15 +79,14 @@ export default {
           itemType,
           showOnlyAvailable,
         },
-      });
-      return res.data;
+      }).then(res => res.data);
     } catch (err) {
       error(err.message);
       return null;
     }
   },
 
-  insertItemOnList: async ({
+  insertItemOnList: ({
     listId,
     userId,
     apiKey,
@@ -98,20 +95,19 @@ export default {
     itemId,
   }) => {
     try {
-      const res = await client.post(`/lists/${listId}/items?${qs.stringify({
+      return client.post(`/lists/${listId}/items?${qs.stringify({
         userId,
         apiKey,
         secretKey,
         itemType,
-      })}`, { id: itemId });
-      return res.data;
+      })}`, { id: itemId }).then(res => res.data);
     } catch (err) {
       error(err.message);
       return null;
     }
   },
 
-  removeItemFromList: async ({
+  removeItemFromList: ({
     listId,
     userId,
     apiKey,
@@ -120,20 +116,19 @@ export default {
     itemId,
   }) => {
     try {
-      const res = await client.delete(`/lists/${listId}/items/${itemId}?${qs.stringify({
+      return client.delete(`/lists/${listId}/items/${itemId}?${qs.stringify({
         userId,
         apiKey,
         secretKey,
         itemType,
-      })}`);
-      return res.data;
+      })}`).then(res => res.data);
     } catch (err) {
       error(err.message);
       return null;
     }
   },
 
-  createList: async ({
+  createList: ({
     userId,
     apiKey,
     secretKey,
@@ -142,7 +137,7 @@ export default {
     extras,
   }) => {
     try {
-      const res = await client.post('/lists', {
+      return client.post('/lists', {
         params: {
           userId,
           apiKey,
@@ -153,15 +148,14 @@ export default {
           name,
           extras,
         },
-      });
-      return res.data;
+      }).then(res => res.data);
     } catch (err) {
       error(err.message);
       return {};
     }
   },
 
-  updateList: async ({
+  updateList: ({
     listId,
     userId,
     apiKey,
@@ -171,7 +165,7 @@ export default {
     extras,
   }) => {
     try {
-      const res = await client.put(`/lists/${listId}`, {
+      return client.put(`/lists/${listId}`, {
         params: {
           userId,
           apiKey,
@@ -182,15 +176,14 @@ export default {
           name,
           extras,
         },
-      });
-      return res.data;
+      }).then(res => res.data);
     } catch (err) {
       error(err.message);
       return {};
     }
   },
 
-  deleteList: async ({
+  deleteList: ({
     listId,
     userId,
     apiKey,
@@ -198,15 +191,14 @@ export default {
     itemType,
   }) => {
     try {
-      const res = await client.delete(`/lists/${listId}`, {
+      return client.delete(`/lists/${listId}`, {
         params: {
           userId,
           apiKey,
           secretKey,
           itemType,
         },
-      });
-      return res.data;
+      }).then(res => res.data);
     } catch (err) {
       error(err.message);
       return null;

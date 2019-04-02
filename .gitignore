@@ -6,3 +6,7 @@ dist
 
 # debug
 npm-debug.log
+
+# package managers
+yarn*
+package-lock.json
