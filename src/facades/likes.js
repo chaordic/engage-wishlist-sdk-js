@@ -22,7 +22,8 @@ export default {
    *
    * @param {Object} options
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.apiKey - A store ID.
+   * @param {!String} options.deviceId - The user's device ID.
+   * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @param {?String} options.productFormat - The format in which the lists products
@@ -45,6 +46,7 @@ export default {
   }) => new Promise((resolve, reject) => {
     ajax({
       url: `${config.api.url}/likes`,
+      type: 'GET',
       params: {
         userId,
         deviceId,
@@ -57,8 +59,8 @@ export default {
         offset,
         limit,
       },
-      success: (res) => { resolve(res); },
-      error: (err) => { reject(err); },
+      success: resolve,
+      error: reject,
     });
   }),
 
@@ -81,9 +83,9 @@ export default {
    * });
    *
    * @param {Object} options
-   * @param {!String} options.listId - A list ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.apiKey - A store ID.
+   * @param {!String} options.deviceId - The user's device ID.
+   * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @param {?Boolean} options.showOnlyAvailable - Whetever unavailable items should be
@@ -99,6 +101,7 @@ export default {
   }) => new Promise((resolve, reject) => {
     ajax({
       url: `${config.api.url}/likes/items/count`,
+      type: 'GET',
       params: {
         userId,
         apiKey,
@@ -106,8 +109,8 @@ export default {
         itemType,
         showOnlyAvailable,
       },
-      success: (res) => { resolve(res); },
-      error: (err) => { reject(err); },
+      success: resolve,
+      error: reject,
     });
   }),
 
@@ -131,10 +134,10 @@ export default {
    * });
    *
    * @param {Object} options
-   * @param {!String} options.listId - A list ID.
    * @param {!String} options.itemId - An item ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.apiKey - A store ID.
+   * @param {!String} options.deviceId - The user's device ID.
+   * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @returns {Promise} - The information on the item that was just liked.
@@ -160,8 +163,8 @@ export default {
       data: {
         id: itemId,
       },
-      success: (res) => { resolve(res); },
-      error: (err) => { reject(err); },
+      success: resolve,
+      error: reject,
     });
   }),
 
@@ -185,10 +188,10 @@ export default {
    * });
    *
    * @param {Object} options
-   * @param {!String} options.listId - A list ID.
    * @param {!String} options.itemId - An item ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.apiKey - A store ID.
+   * @param {!String} options.deviceId - The user's device ID.
+   * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @returns {Promise} - A message of success
@@ -211,8 +214,8 @@ export default {
         secretKey,
         itemType,
       },
-      success: (res) => { resolve(res); },
-      error: (err) => { reject(err); },
+      success: resolve,
+      error: reject,
     });
   }),
 };

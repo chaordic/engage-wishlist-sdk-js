@@ -1,6 +1,6 @@
 import ListFacade from '../../src/facades/lists';
 
-describe('ApiFacade', function() {
+describe('ListsFacade', function() {
   let server;
 
   describe('getList', function() {
@@ -12,7 +12,7 @@ describe('ApiFacade', function() {
       server.restore();
     });
 
-    it('should return the requested list', async function() {
+    it('should return the requested list', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -21,7 +21,7 @@ describe('ApiFacade', function() {
         listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
       };
 
-      const res = {
+      const expectedResponse = {
         id: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
         name: 'list_1',
         items: [],
@@ -30,16 +30,16 @@ describe('ApiFacade', function() {
       server.respondWith(
         'GET',
         /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*/,
-        [200, { 'Content-Type': 'application/json' }, JSON.stringify(res)],
+        [200, { 'Content-Type': 'application/json' }, JSON.stringify(expectedResponse)],
       );
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.getList(options);
-      expect(response).to.deep.equal(res);
+      const response = ListFacade.getList(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty object when the server returns an error', async function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -56,8 +56,8 @@ describe('ApiFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.getList(options);
-      expect(response).to.deep.equal({});
+      const response = ListFacade.getList(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -70,7 +70,7 @@ describe('ApiFacade', function() {
       server.restore();
     });
 
-    it('should return an array of lists', async function() {
+    it('should return an array of lists', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -78,23 +78,23 @@ describe('ApiFacade', function() {
         itemType: 'product',
       };
 
-      const res = {
+      const expectedResponse = {
         lists: [],
       };
 
       server.respondWith(
         'GET',
         /\/engage\/wishlist\/v3\/lists/,
-        [200, { 'Content-Type': 'application/json' }, JSON.stringify(res)],
+        [200, { 'Content-Type': 'application/json' }, JSON.stringify(expectedResponse)],
       );
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.getAllLists(options);
-      expect(response).to.deep.equal(res);
+      const response = ListFacade.getAllLists(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty array when the server returns an error', async function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -110,9 +110,8 @@ describe('ApiFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.getAllLists(options);
-      expect(response).to.be.an('array');
-      expect(response.length).to.equal(0);
+      const response = ListFacade.getAllLists(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -125,7 +124,7 @@ describe('ApiFacade', function() {
       server.restore();
     });
 
-    it('should return the item count', async function() {
+    it('should return the item count', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -146,11 +145,11 @@ describe('ApiFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.getListItemCount(options);
-      expect(response).to.deep.equal(expectedResponse);
+      const response = ListFacade.getListItemCount(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return null when the server returns an error', async function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -167,8 +166,8 @@ describe('ApiFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.getListItemCount(options);
-      expect(response).to.equal(null);
+      const response = ListFacade.getListItemCount(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -181,7 +180,7 @@ describe('ApiFacade', function() {
       server.restore();
     });
 
-    it('should return a message when successful', async function() {
+    it('should return the info on the item if successful', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -191,21 +190,21 @@ describe('ApiFacade', function() {
         itemId: '10031179751',
       };
 
-      const res = 'Items successfully inserted on list';
+      const expectedResponse = { id: 10031179751 };
 
       server.respondWith(
         'POST',
         /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*\/items/,
-        [200, { 'Content-Type': 'application/json' }, res],
+        [200, { 'Content-Type': 'application/json' }, JSON.stringify(expectedResponse)],
       );
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.insertItemOnList(options);
-      expect(response).to.equal(res);
+      const response = ListFacade.insertItemOnList(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty object when the server returns an error', async function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -223,8 +222,8 @@ describe('ApiFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.insertItemOnList(options);
-      expect(response).to.equal(null);
+      const response = ListFacade.insertItemOnList(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -237,7 +236,7 @@ describe('ApiFacade', function() {
       server.restore();
     });
 
-    it('should return a message when successful', async function() {
+    it('should return a message when successful', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -247,21 +246,21 @@ describe('ApiFacade', function() {
         itemId: '10031179751',
       };
 
-      const res = 'Items successfully removed from list';
+      const expectedResponse = 'Items successfully removed from list';
 
       server.respondWith(
         'DELETE',
         /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*\/items\/[0-9]*/,
-        [200, { 'Content-Type': 'application/json' }, res],
+        [200, { 'Content-Type': 'application/json' }, expectedResponse],
       );
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.removeItemFromList(options);
-      expect(response).to.deep.equal(res);
+      const response = ListFacade.removeItemFromList(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty object when the server returns an error', async function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -279,8 +278,8 @@ describe('ApiFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.removeItemFromList(options);
-      expect(response).to.equal(null);
+      const response = ListFacade.removeItemFromList(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -293,7 +292,7 @@ describe('ApiFacade', function() {
       server.restore();
     });
 
-    it('should return the new list when successful', async function() {
+    it('should return the new list when successful', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -302,7 +301,7 @@ describe('ApiFacade', function() {
         name: 'list_2',
       };
 
-      const res = {
+      const expectedResponse = {
         id: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
         name: 'list_2',
         items: [],
@@ -311,16 +310,16 @@ describe('ApiFacade', function() {
       server.respondWith(
         'POST',
         /\/engage\/wishlist\/v3\/lists/,
-        [200, { 'Content-Type': 'application/json' }, JSON.stringify(res)],
+        [200, { 'Content-Type': 'application/json' }, JSON.stringify(expectedResponse)],
       );
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.createList(options);
-      expect(response).to.deep.equal(res);
+      const response = ListFacade.createList(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty object when the server returns an error', async function() {
+    it('should reject the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -337,8 +336,8 @@ describe('ApiFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.createList(options);
-      expect(response).to.deep.equal({});
+      const response = ListFacade.createList(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -351,7 +350,7 @@ describe('ApiFacade', function() {
       server.restore();
     });
 
-    it('should return the updated list when successful', async function() {
+    it('should return the updated list when successful', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -361,7 +360,7 @@ describe('ApiFacade', function() {
         name: 'list_B',
       };
 
-      const res = {
+      const expectedResponse = {
         id: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
         name: 'list_B',
         items: [],
@@ -373,16 +372,16 @@ describe('ApiFacade', function() {
       server.respondWith(
         'PUT',
         /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*/,
-        [200, { 'Content-Type': 'application/json' }, JSON.stringify(res)],
+        [200, { 'Content-Type': 'application/json' }, JSON.stringify(expectedResponse)],
       );
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.updateList(options);
-      expect(response).to.deep.equal(res);
+      const response = ListFacade.updateList(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty object when the server returns an error', async function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -400,8 +399,8 @@ describe('ApiFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.updateList(options);
-      expect(response).to.deep.equal({});
+      const response = ListFacade.updateList(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -414,7 +413,7 @@ describe('ApiFacade', function() {
       server.restore();
     });
 
-    it('should return a message when successful', async function() {
+    it('should return a message when successful', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -423,21 +422,21 @@ describe('ApiFacade', function() {
         listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
       };
 
-      const res = 'List successfully deleted';
+      const expectedResponse = 'List successfully deleted';
 
       server.respondWith(
         'DELETE',
         /\/engage\/wishlist\/v3\/lists\/[A-Za-z0-9-]*/,
-        [200, { 'Content-Type': 'application/json' }, res],
+        [200, { 'Content-Type': 'application/json' }, expectedResponse],
       );
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.deleteList(options);
-      expect(response).to.deep.equal(res);
+      const response = ListFacade.deleteList(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty object when the server returns an error', async function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -454,8 +453,8 @@ describe('ApiFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await ListFacade.deleteList(options);
-      expect(response).to.equal(null);
+      const response = ListFacade.deleteList(options);
+      expect(response).to.be.rejected;
     });
   });
 });

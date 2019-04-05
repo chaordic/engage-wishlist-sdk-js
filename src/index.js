@@ -1,4 +1,4 @@
-import Api from './api';
-import Likes from './likes';
+import Lists from './facades/lists';
+import Likes from './facades/likes';
 
-export { Api, Likes };
+export { Lists, Likes };

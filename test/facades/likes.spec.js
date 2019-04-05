@@ -12,7 +12,7 @@ describe('LikesFacade', function() {
       server.restore();
     });
 
-    it('should return the list of likes', async function() {
+    it('should return the list of likes', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -33,11 +33,11 @@ describe('LikesFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await LikesFacade.getLikes(options);
-      expect(response).to.deep.equal(expectedResponse);
+      const response = LikesFacade.getLikes(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty array when the server returns an error', async function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -53,8 +53,8 @@ describe('LikesFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await LikesFacade.getLikes(options);
-      expect(response).to.deep.equal([]);
+      const response = LikesFacade.getLikes(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -67,7 +67,7 @@ describe('LikesFacade', function() {
       server.restore();
     });
 
-    it('should return the item count', async function() {
+    it('should return the item count', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -87,11 +87,11 @@ describe('LikesFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await LikesFacade.getCount(options);
-      expect(response).to.deep.equal(expectedResponse);
+      const response = LikesFacade.getCount(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return null when the server returns an error', async function() {
+    it('should return null when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -107,8 +107,8 @@ describe('LikesFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await LikesFacade.getCount(options);
-      expect(response).to.equal(null);
+      const response = LikesFacade.getCount(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -121,7 +121,7 @@ describe('LikesFacade', function() {
       server.restore();
     });
 
-    it('should return the info on the item if successful', async function() {
+    it('should return the info on the item if successful', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -140,11 +140,11 @@ describe('LikesFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await LikesFacade.likeItem(options);
-      expect(response).to.deep.equal(expectedResponse);
+      const response = LikesFacade.likeItem(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty object when the server returns an error', async function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -162,8 +162,8 @@ describe('LikesFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await LikesFacade.likeItem(options);
-      expect(response).to.equal(null);
+      const response = LikesFacade.likeItem(options);
+      expect(response).to.be.rejected;
     });
   });
 
@@ -176,7 +176,7 @@ describe('LikesFacade', function() {
       server.restore();
     });
 
-    it('should return a message when successful', async function() {
+    it('should return a message when successful', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -195,11 +195,11 @@ describe('LikesFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await LikesFacade.unlikeItem(options);
-      expect(response).to.deep.equal(expectedResponse);
+      const response = LikesFacade.unlikeItem(options);
+      expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty object when the server returns an error', async function() {
+    it('should return an empty object when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -217,8 +217,8 @@ describe('LikesFacade', function() {
 
       server.respondImmediately = true;
 
-      const response = await LikesFacade.unlikeItem(options);
-      expect(response).to.equal(null);
+      const response = LikesFacade.unlikeItem(options);
+      expect(response).to.be.rejected;
     });
   });
 });
