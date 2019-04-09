@@ -1,4 +1,5 @@
 import { ajax } from '@linx-impulse/commons-js/http/ajax';
+import { getDeviceId } from '../util';
 import config from '../../config';
 
 export default {
@@ -9,7 +10,6 @@ export default {
    * Api.getList({
    *  listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -24,7 +24,6 @@ export default {
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -37,7 +36,6 @@ export default {
   getList: ({
     listId,
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
@@ -52,7 +50,7 @@ export default {
       type: 'GET',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
@@ -73,7 +71,6 @@ export default {
    * @example
    * Api.getAllLists({
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -87,7 +84,6 @@ export default {
    *
    * @param {Object} options
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -95,7 +91,6 @@ export default {
    */
   getAllLists: ({
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
@@ -105,7 +100,7 @@ export default {
       type: 'GET',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
@@ -122,7 +117,6 @@ export default {
    * Api.getListItemCount({
    *  listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -137,7 +131,6 @@ export default {
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -148,7 +141,6 @@ export default {
   getListItemCount: async ({
     listId,
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
@@ -159,7 +151,7 @@ export default {
       type: 'GET',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
@@ -178,7 +170,6 @@ export default {
    *  listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
    *  itemId: '1234567890',
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -194,30 +185,32 @@ export default {
    * @param {!String} options.listId - A list ID.
    * @param {!String} options.itemId - An item ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
+   * @param {?String} options.productFormat - The format in which the lists products
+   * should be returned.
    * @returns {Promise}
    */
   insertItemOnList: ({
     listId,
+    itemId,
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
-    itemId,
+    productFormat,
   }) => new Promise((resolve, reject) => {
     ajax({
       url: `${config.api.url}/lists/${listId}/items`,
       type: 'POST',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
+        productFormat,
       },
       data: {
         id: itemId,
@@ -235,7 +228,6 @@ export default {
    *  listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
    *  itemId: '1234567890',
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -251,7 +243,6 @@ export default {
    * @param {!String} options.listId - A list ID.
    * @param {!String} options.itemId - An item ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -260,7 +251,6 @@ export default {
   removeItemFromList: ({
     listId,
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
@@ -271,7 +261,7 @@ export default {
       type: 'DELETE',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
@@ -288,7 +278,6 @@ export default {
    * Api.createList({
    *  listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -306,7 +295,6 @@ export default {
    *
    * @param {Object} options
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -317,7 +305,6 @@ export default {
    */
   createList: ({
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
@@ -329,7 +316,7 @@ export default {
       type: 'POST',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
@@ -350,7 +337,6 @@ export default {
    * Api.updateList({
    *  listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -369,7 +355,6 @@ export default {
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -381,7 +366,6 @@ export default {
   updateList: ({
     listId,
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
@@ -393,7 +377,7 @@ export default {
       type: 'PUT',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
@@ -414,7 +398,6 @@ export default {
    * Api.deleteList({
    *  listId: 'c15ca47b-a980-5ba9-af14-ad38a6b043d6',
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -429,7 +412,6 @@ export default {
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -438,7 +420,6 @@ export default {
   deleteList: ({
     listId,
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
@@ -448,7 +429,7 @@ export default {
       type: 'DELETE',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,

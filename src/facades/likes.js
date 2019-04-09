@@ -1,4 +1,5 @@
 import { ajax } from '@linx-impulse/commons-js/http/ajax';
+import { getDeviceId } from '../util';
 import config from '../../config';
 
 export default {
@@ -8,7 +9,6 @@ export default {
    * @example
    * Likes.getLikes({
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -22,7 +22,6 @@ export default {
    *
    * @param {Object} options
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -34,7 +33,6 @@ export default {
    */
   getLikes: ({
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
@@ -49,7 +47,7 @@ export default {
       type: 'GET',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
@@ -70,7 +68,6 @@ export default {
    * @example
    * Likes.getCount({
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -84,7 +81,6 @@ export default {
    *
    * @param {Object} options
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -104,6 +100,7 @@ export default {
       type: 'GET',
       params: {
         userId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
@@ -121,7 +118,6 @@ export default {
    * Likes.likeItem({
    *  itemId: '1234567890',
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -136,29 +132,31 @@ export default {
    * @param {Object} options
    * @param {!String} options.itemId - An item ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
+   * @param {?String} options.productFormat - The format in which the lists products
+   * should be returned.
    * @returns {Promise} - The information on the item that was just liked.
    */
   likeItem: ({
+    itemId,
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
-    itemId,
+    productFormat,
   }) => new Promise((resolve, reject) => {
     ajax({
       url: `${config.api.url}/likes/items`,
       type: 'POST',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
+        productFormat,
       },
       data: {
         id: itemId,
@@ -175,7 +173,6 @@ export default {
    * Likes.unlikeItem({
    *  itemId: '1234567890',
    *  userId: 'user123456',
-   *  deviceId: 'dev-1234',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
    *  itemType: 'product',
@@ -190,7 +187,6 @@ export default {
    * @param {Object} options
    * @param {!String} options.itemId - An item ID.
    * @param {!String} options.userId - A user ID.
-   * @param {!String} options.deviceId - The user's device ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {!String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
@@ -198,7 +194,6 @@ export default {
    */
   unlikeItem: ({
     userId,
-    deviceId,
     apiKey,
     secretKey,
     itemType,
@@ -209,7 +204,7 @@ export default {
       type: 'DELETE',
       params: {
         userId,
-        deviceId,
+        deviceId: getDeviceId(),
         apiKey,
         secretKey,
         itemType,
