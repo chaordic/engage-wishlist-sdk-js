@@ -1,5 +1,5 @@
 {
-  "name": "engage-wishlist-sdk-js",
+  "name": "@linx-impulse/engage-wishlist-sdk-js",
   "version": "0.1.0",
   "description": "Linx Impulse Engage Wishlist SDK",
   "main": "src/index.js",
@@ -39,6 +39,7 @@
     "@babel/runtime-corejs2": "^7.2.0",
     "babel-loader": "^8.0.4",
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^5.6.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-import-resolver-webpack": "^0.10.1",
@@ -63,9 +64,6 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "axios": "0.18.0",
-    "joi": "14.3.1",
-    "joi-browser": "13.4.0",
-    "query-string": "6.2.0"
+    "@linx-impulse/commons-js": "git+ssh://git@github.com:chaordic/commons-js.git"
   }
 }

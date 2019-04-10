@@ -1,5 +1,8 @@
 export default {
   api: {
-    url: '//listas.neemu.com/api/v3',
+    url: '//api.linximpulse.com/engage/wishlist/v3',
+  },
+  cookieName: {
+    deviceId: 'chaordic_browserId',
   },
 };

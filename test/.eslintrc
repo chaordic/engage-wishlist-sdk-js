@@ -12,6 +12,7 @@
   },
   "globals": {
     "sinon": true,
+    "chai": true,
     "expect": true
   }
 }
