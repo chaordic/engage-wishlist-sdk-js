@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/chaordic/engage-wishlist-sdk-js/compare/v0.1.0...v0.2.0) (2019-04-10)
+
+
+### Features
+
+* device id generation ([abf7f9d](https://github.com/chaordic/engage-wishlist-sdk-js/commit/abf7f9d))
+* new likes module ([afd6f98](https://github.com/chaordic/engage-wishlist-sdk-js/commit/afd6f98))
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/chaordic/engage-wishlist-sdk-js/compare/v0.0.0...v0.1.0) (2019-04-01)
 

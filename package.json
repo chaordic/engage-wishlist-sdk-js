@@ -1,6 +1,6 @@
 {
   "name": "@linx-impulse/engage-wishlist-sdk-js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Linx Impulse Engage Wishlist SDK",
   "main": "src/index.js",
   "repository": {
