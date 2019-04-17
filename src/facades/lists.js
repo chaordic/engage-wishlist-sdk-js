@@ -138,7 +138,7 @@ export default {
    * used toward the total.
    * @returns {Promise}
    */
-  getListItemCount: async ({
+  getListItemCount: ({
     listId,
     userId,
     apiKey,
