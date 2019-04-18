@@ -23,9 +23,9 @@ export default {
    *
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
-   * @param {!String} options.userId - A user ID.
+   * @param {?String} options.userId - A user ID.
    * @param {!String} options.apiKey - A store api key.
-   * @param {!String} options.secretKey - A store secret key.
+   * @param {?String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @param {?String} options.productFormat - The format in which the lists products
    * should be returned.
@@ -83,9 +83,9 @@ export default {
    * });
    *
    * @param {Object} options
-   * @param {!String} options.userId - A user ID.
+   * @param {?String} options.userId - A user ID.
    * @param {!String} options.apiKey - A store api key.
-   * @param {!String} options.secretKey - A store secret key.
+   * @param {?String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @returns {Promise}
    */
@@ -130,9 +130,9 @@ export default {
    *
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
-   * @param {!String} options.userId - A user ID.
+   * @param {?String} options.userId - A user ID.
    * @param {!String} options.apiKey - A store api key.
-   * @param {!String} options.secretKey - A store secret key.
+   * @param {?String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @param {?Boolean} options.showOnlyAvailable - Whetever unavailable items should be
    * used toward the total.
@@ -184,9 +184,9 @@ export default {
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
    * @param {!String} options.itemId - An item ID.
-   * @param {!String} options.userId - A user ID.
+   * @param {?String} options.userId - A user ID.
    * @param {!String} options.apiKey - A store api key.
-   * @param {!String} options.secretKey - A store secret key.
+   * @param {?String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @param {?String} options.productFormat - The format in which the lists products
    * should be returned.
@@ -242,9 +242,9 @@ export default {
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
    * @param {!String} options.itemId - An item ID.
-   * @param {!String} options.userId - A user ID.
+   * @param {?String} options.userId - A user ID.
    * @param {!String} options.apiKey - A store api key.
-   * @param {!String} options.secretKey - A store secret key.
+   * @param {?String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @returns {Promise}
    */
@@ -294,9 +294,9 @@ export default {
    * });
    *
    * @param {Object} options
-   * @param {!String} options.userId - A user ID.
+   * @param {?String} options.userId - A user ID.
    * @param {!String} options.apiKey - A store api key.
-   * @param {!String} options.secretKey - A store secret key.
+   * @param {?String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @param {!String} options.name - The name of the list that will be created.
    * @param {?Object} options.extras - An object containing any addional information that
@@ -354,9 +354,9 @@ export default {
    *
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
-   * @param {!String} options.userId - A user ID.
+   * @param {?String} options.userId - A user ID.
    * @param {!String} options.apiKey - A store api key.
-   * @param {!String} options.secretKey - A store secret key.
+   * @param {?String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @param {!String} options.name - The name of the list that will be created.
    * @param {?Object} options.extras - An object containing any addional information that
@@ -411,9 +411,9 @@ export default {
    *
    * @param {Object} options
    * @param {!String} options.listId - A list ID.
-   * @param {!String} options.userId - A user ID.
+   * @param {?String} options.userId - A user ID.
    * @param {!String} options.apiKey - A store api key.
-   * @param {!String} options.secretKey - A store secret key.
+   * @param {?String} options.secretKey - A store secret key.
    * @param {!String} options.itemType - The type of item, can be 'product' or 'collection'.
    * @returns {Promise}
    */
