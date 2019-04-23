@@ -91,7 +91,7 @@ describe('LikesFacade', function() {
       expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return null when the server returns an error', function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
@@ -199,7 +199,7 @@ describe('LikesFacade', function() {
       expect(response).to.eventually.deep.equal(expectedResponse);
     });
 
-    it('should return an empty object when the server returns an error', function() {
+    it('should reject when the server returns an error', function() {
       const options = {
         userId: 'user123456',
         apiKey: 'apiKeyFake',
