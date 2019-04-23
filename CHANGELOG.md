@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/chaordic/engage-wishlist-sdk-js/compare/v0.2.1...v0.3.0) (2019-04-23)
+
+
+### Bug Fixes
+
+* corrected docs and a few tests ([5954c25](https://github.com/chaordic/engage-wishlist-sdk-js/commit/5954c25))
+
+
+### Features
+
+* get like frequency function ([6da8989](https://github.com/chaordic/engage-wishlist-sdk-js/commit/6da8989))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/chaordic/engage-wishlist-sdk-js/compare/v0.2.0...v0.2.1) (2019-04-17)
 
