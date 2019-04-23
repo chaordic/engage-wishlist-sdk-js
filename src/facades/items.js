@@ -8,7 +8,7 @@ export default {
    *
    * @example
    * Items.getFrequency({
-   *  itemIds: [123, 456, 789],
+   *  itemId: [123, 456, 789],
    *  userId: 'user123456',
    *  apiKey: 'some-store',
    *  secretKey: 'tis-a-secret',
@@ -24,7 +24,7 @@ export default {
    * });
    *
    * @param {Object} options
-   * @param {!Array} options.itemIds - An array of item ids.
+   * @param {!Array} options.itemId - An array of item ids.
    * @param {?String} options.userId - A user ID.
    * @param {!String} options.apiKey - A store api key.
    * @param {?String} options.secretKey - A store secret key.
@@ -32,7 +32,7 @@ export default {
    * @returns {Promise}
    */
   getFrequency: ({
-    itemIds,
+    itemId,
     userId,
     apiKey,
     secretKey,
@@ -42,7 +42,7 @@ export default {
       url: `${config.api.url}/items/frequency`,
       type: 'GET',
       params: {
-        itemIds,
+        itemId,
         userId,
         deviceId: getDeviceId(),
         apiKey,
