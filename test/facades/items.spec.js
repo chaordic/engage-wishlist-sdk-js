@@ -14,7 +14,7 @@ describe('ItemsFacade', function() {
 
     it('should return an array of item frequencies', function() {
       const options = {
-        itemIds: ['123', '456', '789'],
+        itemId: ['123', '456', '789'],
         userId: 'user123456',
         apiKey: 'apiKeyFake',
         secretKey: 'secretKeyFake',
@@ -41,7 +41,7 @@ describe('ItemsFacade', function() {
 
     it('should reject when the server returns an error', function() {
       const options = {
-        itemIds: '[\'123\', \'456\', \'789\']',
+        itemId: ['123', '456', '789'],
         userId: 'user123456',
         apiKey: 'apiKeyFake',
         secretKey: 'secretKeyFake',
