@@ -52,6 +52,6 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "@linx-impulse/commons-js": "git+ssh://git@github.com:chaordic/commons-js.git"
+    "@linx-impulse/commons-js": "^4.0.2"
   }
 }
