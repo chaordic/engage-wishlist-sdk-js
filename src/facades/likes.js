@@ -96,7 +96,7 @@ export default {
     showOnlyAvailable,
   }) => new Promise((resolve, reject) => {
     ajax({
-      url: `${config.api.url}/likes/items/count`,
+      url: `${config.api.url}/likes/count`,
       type: 'GET',
       params: {
         userId,

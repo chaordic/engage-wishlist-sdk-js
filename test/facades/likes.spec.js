@@ -81,7 +81,7 @@ describe('LikesFacade', function() {
 
       server.respondWith(
         'GET',
-        /\/engage\/wishlist\/v3\/likes\/items\/count/,
+        /\/engage\/wishlist\/v3\/likes\/count/,
         [200, { 'Content-Type': 'application/json' }, JSON.stringify(expectedResponse)],
       );
 
