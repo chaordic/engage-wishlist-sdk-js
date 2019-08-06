@@ -5,6 +5,10 @@ function build() {
   run(`webpack --mode=${env}`);
 }
 
+function doc() {
+  run('jsdoc -c jsdoc.json');
+}
+
 function test() {
   const watch = options(this).watch ? '' : '--single-run';
   run(`karma start ${watch}`);
@@ -26,6 +30,10 @@ help(build, {
   },
 });
 
+help(doc, {
+  description: 'Generate documentation automatically using jsdoc',
+});
+
 help(test, {
   description: 'Run unit tests using Karma',
   options: {
@@ -44,6 +52,7 @@ help(release, 'Generate and push a new tag and update changelog');
 
 module.exports = {
   build,
+  doc,
   test,
   lint,
   release,

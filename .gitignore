@@ -6,3 +6,6 @@ dist
 
 # debug
 npm-debug.log
+
+# Doc
+doc

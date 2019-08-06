@@ -2,6 +2,10 @@ import { ajax } from '@linx-impulse/commons-js/http/ajax';
 import { getDeviceId } from '../util';
 import config from '../../config';
 
+/**
+ * @module Items
+ */
+
 export default {
   /**
    * Get the frequency of likes (a.k.a. how many users liked) for one or more items

@@ -2,6 +2,10 @@ import { ajax } from '@linx-impulse/commons-js/http/ajax';
 import { getDeviceId } from '../util';
 import config from '../../config';
 
+/**
+ * @module Likes
+ */
+
 export default {
   /**
    * Get all user likes
